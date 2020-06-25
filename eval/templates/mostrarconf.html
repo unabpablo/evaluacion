@@ -1,0 +1,61 @@
+{%extends "evaluaciones.html"%}
+{%block codigo%}
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+
+</head>
+<body>
+
+<table class="table table-bordered">
+
+<thead>
+  <tr>
+      <td>Nombre</td>
+
+    
+    <td>Periodos</td>
+    <td>Nombre evaluado 1</td>
+    <td>Nombre evaluado 2</td>
+  </tr>
+</thead>
+<tbody>
+  
+
+  <tr>
+    
+    <td>{{conf.Nombre}}</td>
+    <td>{{conf.Periodo}}</td>
+   
+    {%for i in conf.evaluador.all%}
+    <td>{{i}}</td>{%endfor%}
+    {%for k in conf.evaluado.all%}
+    <td>{{k}}</td>
+    {%endfor%}
+    <td> <form id="frm_edit" action="http://127.0.0.1:8000/" method="post">
+        {% csrf_token %}
+      
+    
+
+                    <!-- form controls -->
+                    <input type="submit" value="Volver"/>
+                    </form>
+    </td>
+  </tr>
+
+
+
+</tbody>
+
+</table>
+
+
+
+</body>
+{%endblock codigo%}
+
+   
+

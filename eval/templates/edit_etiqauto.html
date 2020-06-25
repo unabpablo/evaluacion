@@ -1,0 +1,75 @@
+{% extends "evaluaciones.html"%}
+{% load widget_tweaks %}
+{%load staticfiles%}
+{%block css%}
+
+{%endblock css%}
+{%block codigo%}
+
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+
+  <div class="container text-center">
+
+     
+  <form method="post">
+    {% csrf_token %}
+
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+
+    {% for field in form %}
+    {% if forloop.first %}
+      <h1>Etiquetas para la evaluación </h1>
+
+ 
+        {% csrf_token %}
+    {% load crispy_forms_tags %}
+    <table class="col-md-9" style="margin-left: 450px;">
+    {{ formset.management_form|crispy }}
+    
+        {% for form in formset.forms %}
+                <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
+                    {% for field in form.visible_fields %}
+                    <td>
+                        {# Include the hidden fields in the form #}
+                        {% if forloop.first %}
+                        
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+                        {% endif %}
+                        {{ field.errors.as_ul }}
+          
+                    
+                            {{ field|as_crispy_field }}
+                            <!-- form controls -->
+    
+                    </td>
+                    {% endfor %}
+    
+                </tr>
+        {% endfor %}
+      {%endif%}
+
+
+    {% endfor %}
+    <button type="submit" class="btn btn-primary" onclick="return confirm('Estás seguro?')">
+      <i class="fas fa-cog"></i> Crear Etiqueta
+    </button>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+  <script type="text/javascript">
+      $('.formset_row-{{ formset.prefix }}').formset({
+          addText: 'Añadir',
+          deleteText: 'Eliminar',
+          prefix: '{{ formset.prefix }}',
+      });
+  </script>
+  </div>                   
+{%endblock codigo%}

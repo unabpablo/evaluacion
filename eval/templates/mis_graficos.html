@@ -1,0 +1,134 @@
+
+{%extends "evaluaciones.html"%}
+
+
+{%block codigo%}  
+
+<div class="container">
+    <div class="col-xs-12">
+  
+        {%if messages%}
+        {%for message in messages%}
+        <div class="alert alert-{{message.tags}} m-2" id="msg" role=  "alert">
+  
+            <center>{{message}}</center>
+        </div>
+  
+    </div>
+  </div>
+  {%endfor%}
+  {%endif%}
+
+
+                {% if form %}
+                <div class="container">
+                 
+                  <h3>MIS EVALUACIONES</h2>
+                 
+                
+                
+                <table class="table table-striped">
+                 
+                  <thead>
+                 
+                    <tr>
+                 
+
+                 
+                      <th>Nombre de Evaluación de Personal</th>
+                      
+                      <th></th>
+                      
+                    </tr>
+                 
+                  </thead>
+                 
+                  <tbody>
+                 
+                    {%for i in form %}
+               
+                    <tr>
+                 
+                      
+                   
+                      
+                      <th scope="row">{{i.Nombre}}</th>
+                      {%if i.modo == "Automatico"%}
+                      <td><form id="frm_edit" action="{%url 'registro:autochar'  pk=i.pk%}"  method="get">
+                        {% csrf_token %}
+                                    <!-- form controls -->  
+                                    <button type="submit" class="btn btn-primary">
+                                      <i class="fas fa-cog"></i> Tomar Decision
+                                    </button>
+                                    </form>
+                        
+                        {%else%}
+                      <td><form id="frm_edit" action="{%url 'registro:realizar_evassl' pk=i.pk%}"  method="get">
+                        {% csrf_token %}
+                                    <!-- form controls -->  
+                                    <button type="submit" class="btn btn-primary">
+                                      <i class="fas fa-cog"></i> Tomar Decision
+                                    </button>
+                                    </form>
+                                    {%endif%}
+                                    {%endfor%}
+
+
+                    </tr>
+                 
+                    {% else %}
+                    <h1>No hay Evaluaciones </h1>
+                  
+
+                                                  {%endif%}
+                  </tbody>
+                 
+                </table>
+                 
+                
+
+
+
+
+     
+                        
+                     
+
+                        
+                    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                </div>
+                
+
+
+
+
+
+
+
+
+
+{%endblock codigo%}
+
+
+
+
+
+   
+

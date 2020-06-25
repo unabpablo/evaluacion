@@ -1,0 +1,25 @@
+
+{% extends "evaluaciones.html"%}
+{% load staticfiles %}
+{% block codigo %}
+  <div class="container">
+    <div class="jumbotron">
+      {% if registered %}
+        <h1>Registración exitosa!</h1>
+      {% else %}
+        <h1>Registro</h1>
+      
+<form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          {{ profile_form.as_p }}
+          {{usuario.as_p}}
+          {{evaluador.as_p}}
+          {{experto.as_p}}
+          <input type="submit" name="" value="Registrar">
+        </form>
+        
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

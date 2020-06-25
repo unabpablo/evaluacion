@@ -1,0 +1,140 @@
+
+   
+{%extends "evaluaciones.html"%}
+{% load widget_tweaks %}
+{%block codigo%}
+
+
+
+
+
+
+  <div class="container text-center">
+    <h1>Grafico de evaluación</h1>
+<div id="chart-1">{{ output|safe }}</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% ifequal user.groups.all.0.name 'admin' %}
+
+
+<div class="container text-center">
+
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+        <td>Nombre Evaluado</td>
+        <td>Nombre Evaluador</td>
+  
+      
+        {%for a in form %}
+  
+
+        <td>{{a.Nombre}}</td>
+  
+    
+        {%endfor%}
+    </tr>
+  </thead>
+  <tbody>
+    
+      {%for b in form2%}
+    <tr>
+  
+        <td>{{b.Evaluado}}</td>
+
+     
+      <td>{{b.Evaluador}}</td>
+      {%if b.Peso1 is not None%}
+      <td>{{b.Peso1}}</td>
+      {%endif%}
+      {%if b.Peso2 is not None%}
+      <td>{{b.Peso2}}</td>
+      {%endif%}
+        {%if b.Peso3 is not None%}
+      <td>{{b.Peso3}}</td>
+      {%endif%}
+      {%if b.Peso4 is not None%}
+      <td>{{b.Peso4}}</td>
+      {%endif%}
+   
+      {%endfor%}
+    </tr>
+  
+  
+  
+  </tbody>
+  
+  </table>
+    </div>
+    <div class="container text-center">
+<h1>TOMAR DECISION</h1>
+
+
+{%if form5.0%}
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
+  <label class="custom-control-label" for="customRadio2"><strong>{{form5.0}}</strong></label>
+</div>
+</form>
+{%endif%}
+{%if form5.1%}
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+    <label class="form-check-label"><strong>{{form5.1 }}</strong></label>
+    </div>
+    {%endif%}
+    {%if form5.2%}
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+    <label class="form-check-label"><strong>{{form5.2 }}</strong></label>
+    </div>
+    {%endif%}
+
+    {%if form5.3%}
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+    <label class="form-check-label"><strong>{{form5.3 }}</strong></label>
+    </div>
+    {%endif%}
+    {%if form5.4%}
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+        <label class="form-check-label"><strong>{{form5.4 }}</strong></label>
+        </div>
+        {%endif%}
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Comentarios de evaluacion</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <form method="post" id="DogForm"></form>
+          <div class="form-group">
+              <div class="form-group">
+                  <a href="http://127.0.0.1:8000" class="btn btn-success" onclick="return confirm('Estás seguro?')">
+                    <span class="glyphicon glyphicon-ok"></span> Guardar
+               
+                  <a href="http://127.0.0.1:8000" class="btn btn-danger" onclick="return confirm('Estás seguro?')">Cancelar</a>
+          
+            </div>
+          </form>
+   </div>
+  {% endifequal %}
+
+ 
+                              
+{%endblock codigo%}
+   
+   
+ 
+

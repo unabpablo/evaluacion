@@ -1,0 +1,159 @@
+  {% extends "evaluaciones.html"%}
+  {% load widget_tweaks %}
+{%block codigo%}
+
+<form method="post">
+  {% csrf_token %}
+
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+
+
+
+  {% for field in form2 %}
+  {% if forloop.counter == 1 %}
+  <div class="form-group">
+    <label for="{{ field.id_for_label }}"></label>
+    <h1>{{ field.Nombre }}</h1>
+    {% for field in form.visible_fields %}
+    <div class="form-group">
+      <label for="{{ field.id_for_label }}"></label>
+    
+      {{ field|add_class:'form-control' }}
+    
+    
+    
+    </div>
+    {% endfor %}
+    
+  
+  
+  
+  </div>
+  {% endif %}
+  {% endfor %}
+
+
+
+
+{% for field in form2 %}
+{% if forloop.counter == 2 %}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+  <h1>{{ field.Nombre }}</h1>
+  
+  {% for field in form3.visible_fields %}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+
+  {{ field|add_class:'form-control' }}
+
+
+
+</div>
+{% endfor %}
+
+
+
+</div>
+{% endif %}
+{% endfor %}
+
+{% for field in form2 %}
+{% if forloop.counter == 3%}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+  <h1>{{ field.Nombre }}</h1>
+  
+
+  {%if form4 %}
+{% for field in form4.visible_fields %}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+
+  {{ field|add_class:'form-control' }}
+
+
+
+</div>
+{% endfor %}
+
+
+{%endif%}
+
+</div>
+{% endif %}
+{% endfor %}
+
+
+
+{% for field in form2 %}
+{% if forloop.counter == 4%}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+  <h1>{{ field.Nombre }}</h1>
+  
+
+  {%if form5 %}
+{% for field in form5.visible_fields %}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+
+  {{ field|add_class:'form-control' }}
+
+
+
+</div>
+{% endfor %}
+
+
+{%endif%}
+
+</div>
+{% endif %}
+{% endfor %}
+
+
+
+
+
+{% for field in form2 %}
+{% if forloop.counter == 5%}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+  <h1>{{ field.Nombre }}</h1>
+  
+
+  {%if form6 %}
+{% for field in form6.visible_fields %}
+<div class="form-group">
+  <label for="{{ field.id_for_label }}"></label>
+
+  {{ field|add_class:'form-control' }}
+
+
+
+</div>
+{% endfor %}
+
+
+{%endif%}
+
+</div>
+{% endif %}
+{% endfor %}
+
+
+<div class="form-group">
+    <button type="submit" class="btn btn-success" onclick="return confirm('Estás seguro?')">
+      <span class="glyphicon glyphicon-ok"></span> Guardar
+    </button>
+    <a href="http://127.0.0.1:8000/Crear_eval/" class="btn btn-danger" onclick="return confirm('Estás seguro?')">Cancelar</a>
+
+  </div>
+</form>
+                         
+                                  
+               
+{%endblock codigo%}

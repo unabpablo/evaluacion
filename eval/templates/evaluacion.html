@@ -1,0 +1,247 @@
+
+{% extends "evaluaciones.html"%}
+
+{%block codigo%}
+
+<div class="container">
+  <div class="col-xs-12">
+
+      {%if messages%}
+      {%for message in messages%}
+      <div class="alert alert-{{message.tags}} m-2" id="msg" role=  "alert">
+
+          <center>{{message}}</center>
+      </div>
+
+  </div>
+</div>
+{%endfor%}
+{%endif%}
+<html>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% if request.user.is_superuser %}
+<div class="container text-center">
+    <h1> <p><strong>Nueva Evaluación</strong></p></h1>
+   
+ 
+<div class="container">
+    <div class="row">
+
+        <div class="container text-center">
+            <form id="frm_edit" action="http://127.0.0.1:8000/confnueva/" method="GET">
+              {% csrf_token %}
+              <!-- form controls -->
+  
+  
+                {% csrf_token %}
+                
+                <!-- form controls -->
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-cog"></i> Crear Nueva
+                </button>
+              </div>
+                         </form>             
+
+
+   
+      </div>
+
+    </div>
+  </div>
+
+                            
+                                                        {% if conf2 %}                                             
+
+                                                        <div class="container">
+ 
+                                                          <h1>Evaluaciones</h1>
+                                                         
+                                                        
+                                                        
+                                                        <table class="table table-striped">
+                                                         
+                                                          <thead >
+                                                         
+                                                            <tr>
+                                                         
+                                                         
+                                                              <th>Nombre de Evaluación</th>
+                                                         
+                                                              <th>Tipo de evaluación</th>
+                                                              <th>Estado</th>
+                                                              <th></th>
+                                                            </tr>
+                                                         
+                                                          </thead>
+                                                         
+                                                          <tbody>
+                                                        
+                                                            {%for i in conf2 %}
+ 
+                                                            <tr>
+                                                        
+                                                         
+                                                         
+                                                              <td>{{i.Nombre}}</td>
+                                                              <td>{{i.modo}}</td>
+                                                              <td>{{i.status}}</td>
+                                                              {%if i.status == "Creado" %}
+                                                                  {%if i.modo == "Automatico" %}
+
+                                                                  <td><form id="frm_edit" action="{%url 'registro:edit_etiqauto' pk=i.pk%}"  method="get">
+                                                                      {% csrf_token %}
+                                                                                  <!-- form controls -->  
+                                                                                  <button type="submit" class="btn btn-primary">
+                                                                                    <i class="fas fa-cog"></i> Ver Atributos
+                                                                                  </button>
+                                                                                  </form>
+                                                                                  {%else%}    
+                                                                                  <td><form id="frm_edit" action="{%url 'registro:confediciion' pk=i.pk%}"  method="get">
+                                                                                      {% csrf_token %}
+                                                                                                  <!-- form controls -->  
+                                                                                                  <button type="submit" class="btn btn-primary">
+                                                                                                    <i class="fas fa-cog"></i> Revisar evaluación
+                                                                                                  </button>
+                                                                                                  </form>
+                                                                                                  {%endif%}
+
+                                                                  {%else%}
+
+                                                                  
+
+                                                      
+
+                                                              {%if i.status == "Activo" %}
+                                                              {%if i.modo == "Manual" %}
+                                                              <td><form id="frm_edit" action="{%url 'registro:confediciion' pk=i.pk%}"  method="get">
+                                                                {% csrf_token %}
+                                                                            <!-- form controls -->  
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                              <i class="fas fa-cog"></i> Revisar Evaluación
+                                                                            </button>
+                                                                            </form>
+                                                                          
+                                                                {%else%}
+
+                                                                <td><form id="frm_edit" action="{%url 'registro:editar' pk=i.pk%}"  method="get">
+                                                                    {% csrf_token %}
+                                                                                <!-- form controls -->  
+                                                                                <button type="submit" class="btn btn-primary">
+                                                                                  <i class="fas fa-cog"></i> Revisar Evaluación
+                                                                                </button>
+                                                                                </form>
+                                                                                {%endif%}
+                                                                                {%endif%}
+
+                                                                            {% endif %}
+                                                                            {%endfor%}
+                                                              
+                                                              
+
+
+
+
+
+                                                            </tr>
+                                                            {%endif%}
+
+
+
+
+
+ 
+ 
+ 
+</div>
+{%else%}
+
+
+<table class="table table-striped">
+                                                         
+  <thead >
+ 
+    <tr>
+ 
+      {% if conf %}    
+      
+<h1>Evaluaciones</h1>
+      <th>Nombre de Evaluación</th>
+ 
+      <th>Tipo de evaluación</th>
+      <th>Estado</th>
+      <th>Estado</th>
+    </tr>
+ 
+  </thead>
+  <tbody>
+                                                        
+      {%for i in conf2 %}
+
+      <tr>
+  
+   
+   
+        <td>{{i.Nombre}}</td>
+        <td>{{i.modo}}</td>
+        <td>{{i.status}}</td>
+        {%if i.status == "Creado" %}
+            {%if i.modo == "Automatico" %}
+
+            <td><form id="frm_edit" action="{%url 'registro:edit_etiqauto' pk=i.pk%}"  method="get">
+                {% csrf_token %}
+                            <!-- form controls -->  
+                            <button type="submit" class="btn btn-primary">
+                              <i class="fas fa-cog"></i> Añadir Etiquetas
+                            </button>
+                            </form>
+                            {%else%}    
+                            <td><form id="frm_edit" action="{%url 'registro:editar' pk=i.pk%}"  method="get">
+                                {% csrf_token %}
+                                            <!-- form controls -->  
+                                            <button type="submit" class="btn btn-primary">
+                                              <i class="fas fa-cog"></i> Añadir Etiquetas
+                                            </button>
+                                            </form>
+                                            {%endif%}
+            {%else%}
+
+            
+
+
+
+        {%if i.status == "Activo" %}
+        <td><form id="frm_edit" action="{%url 'registro:confediciion' pk=i.pk%}"  method="get">
+          {% csrf_token %}
+                      <!-- form controls -->  
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-cog"></i> Revisar Evaluación
+                      </button>
+                      </form>
+                      {%endif%}    
+
+                      {% endif %}
+                      {%endfor%}
+                      
+        
+
+
+
+
+
+      </tr>
+
+
+{%else%}
+<h1>No Hay evaluaciones disponibles</h1>
+
+{%endif%}
+
+
+{%endif%}
+</div>
+{%endblock codigo%}

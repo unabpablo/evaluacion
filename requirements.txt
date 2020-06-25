@@ -1,0 +1,14 @@
+Django==2.2.2
+django-bootstrap-datepicker-plus==3.0.5
+django-celery
+django-widget-tweaks
+django-crispy-forms==1.7.2
+django-multiselectfield
+schedule
+django-bootstrap-datepicker
+django-background-tasks
+django_tables2
+psycopg2-binary
+numpy
+matplotlib==3.1.2
+Pillow

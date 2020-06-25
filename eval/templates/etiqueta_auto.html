@@ -1,0 +1,73 @@
+{% extends "evaluaciones.html"%}
+{% load widget_tweaks %}
+{%block codigo%}
+
+<div class="container">
+  <div class="col-xs-12">
+
+      {%if messages%}
+      {%for message in messages%}
+      <div class="alert alert-{{message.tags}} m-2" id="msg" role=  "alert">
+
+          <center>{{message}}</center>
+      </div>
+
+  </div>
+</div>
+{%endfor%}
+{%endif%}
+<form id="frm_edit" action='' method="POST"></td>
+  {% csrf_token %}
+
+  <div class="container">
+          <div class="card">
+              <div class="card-header">
+                      <h1>Atributos</h1>
+              </div>
+
+                  {% load crispy_forms_tags %}
+                  <table class="col-md-9" style="margin-left: 10px;">
+                    {%for i in conf2%}
+  
+
+                    <h2>  </h2>   
+                    <h2>-{{i}}</h2>   
+                        {%endfor%}       
+                        
+                      </div>
+
+                      <div class ="container">
+                          <br>
+                          
+                          <a href="#ventana1" class ="btn btn-primary btn-lg" data-toggle="modal"> Guardar  </a>
+                          <a href="http://127.0.0.1:8000/evaluacion" class="btn btn-default">Cancelar</a>
+                          <div class ="modal fade modal-auto-clear" id="ventana1" >
+                            <div class ="modal-dialog">
+                              <div class = "modal-content">
+                                <div class="modal-header">
+                                 
+                                  <h4 class ="modal-title">Confirmación </h4>
+                                  <button tyle ="button" class ="close" data-dismiss="modal" aria-hidden="true">&times; </button>
+                                </div>
+                                  <div class="modal-body">
+                                    <p> ¿Estás Seguro?</p>
+                    
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="submit" class="btn btn-default" type="submit" class="Save" >Confirmar</button>
+                                    <button type="button" class  ="btn btn-default" data-dismiss="modal">Cerrar</button>
+                     
+                                  </div>
+                    
+                              </div>
+                            </div>
+                          </div>
+                          
+                          
+                          </div>
+                          <script src= "http://code.jquery.com/jquery-latest.js"></script>
+                          <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+                      </form>
+                        </form>
+                  </table>
+{%endblock codigo%}

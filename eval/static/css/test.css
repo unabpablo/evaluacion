@@ -1,0 +1,24 @@
+.row form-row spacer {
+
+    text-align: center;
+
+}
+h1,
+h3 {
+  text-align: center;
+}
+.row form-row spacer {
+    border-radius: 5px;
+    width: 50%;
+  margin: auto;
+    float: none;
+}
+.col{
+
+  width: 150px;
+  height: 100px;
+  margin: 0 auto;
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}

@@ -1,0 +1,67 @@
+{% extends "evaluaciones.html"%}
+{% load widget_tweaks %}
+{%block codigo%}
+
+
+{% if form %}
+<div class="container">
+ 
+  <h3>MIS EVALUACIONES</h2>
+ 
+
+
+<table class="table table-striped">
+ 
+  <thead>
+ 
+    <tr>
+ 
+
+ 
+
+      <th>Nombre de Configuración</th>
+      <th>Nombre del Evaluado</th>
+      <th>Fecha de término</th>
+      <th>Status</th>
+    </tr>
+ 
+  </thead>
+ 
+  <tbody>
+ 
+    {%for i in form %}
+    <tr>
+ 
+      <th scope="row">{{i.conf.Nombre}}</th>
+      <th scope="row">{{i.Evaluado}}</th>
+      <th scope="row">{{i.conf.fecha_termino}}</th>
+      <th scope="row">Disponible</th>
+
+      <td><form id="frm_edit" action="{%url 'registro:eval_data' pk=i.pk%}"  method="GET">
+        {% csrf_token %}
+                    <!-- form controls -->  
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-cog"></i> Completar
+                    </button>
+                    </form>
+                    {%endfor%}
+
+    </tr>
+ 
+    {% else %}
+    <h1>No hay Evaluaciones pendientes</h1>
+  
+
+                                  {%endif%}
+  </tbody>
+ 
+</table>
+ 
+ 
+ 
+</div>
+
+
+
+       
+{%endblock codigo%}

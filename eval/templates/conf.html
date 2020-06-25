@@ -1,0 +1,66 @@
+#{% extends "evaluaciones.html"%}
+
+{%block codigo%}
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+
+</head>
+<body>
+
+<table class="table table-bordered">
+
+<thead>
+  <tr>
+      <td>#</td>
+
+    <td>Nombre</td>
+    <td>configurar</td>
+  </tr>
+</thead>
+<tbody>
+  {% if conf %}
+  {% for confs in conf %}
+  <tr>
+    <td>{{confs.id}}</td>
+    <td>{{confs.Nombre}}</td>
+    <td> <form id="frm_edit" action="" method="post">
+        {% csrf_token %}
+      
+    
+        
+                    <!-- form controls -->
+                    <input type="submit" value="Posasast"/>
+                    </form>
+    </td>
+  </tr>
+  {% endfor %}
+
+  {% else %}
+  <h1>No hay configuraciones</h1>
+
+  <form id="frm_edit" action="http://127.0.0.1:8000/confnueva/" method="post">
+    {% csrf_token %}
+    
+                                <!-- form controls -->
+                                <input type="submit" value="Crear configuracion"/>
+                                </form>
+
+</tbody>
+
+</table>
+{%endif%}
+<form id="frm_edit" action="http://127.0.0.1:8000/confnueva/" method="post">
+    {% csrf_token %}
+  
+
+    
+                <!-- form controls -->
+                <input type="submit" value="Postasas"/>
+                </form>
+
+</body>
+{%endblock codigo%}

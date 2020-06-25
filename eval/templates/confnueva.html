@@ -1,0 +1,83 @@
+
+  {% extends "evaluaciones.html"%}
+  {% load widget_tweaks %}
+
+  {%block codigo%}
+
+
+
+<center>  <h1>Nueva Evaluación</h1></center>
+
+
+
+     
+  <form method="post" enctype="multipart/form-data" id="DogForm">
+    {% csrf_token %}
+
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+
+    {% for field in form.visible_fields %}
+      <div class="form-group">
+
+
+        <div class="container text-center">  
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field|add_class:'form-control' }}
+        
+        {{ field.errors }}
+       
+        
+        {% for error in field.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+       
+    {% endfor %}
+    {{form.non_field_errors}}
+    {{form2}}
+    <div class="form-group">
+
+
+
+
+    {% csrf_token %}
+  <div class ="container">
+      <br>
+      
+      <a href="#ventana1" class ="btn btn-primary btn-lg" data-toggle="modal"> Guardar  </a>
+      <a href="http://127.0.0.1:8000/evaluacion" class="btn btn-default">Cancelar</a>
+      <div class ="modal fade modal-auto-clear" id="ventana1" >
+        <div class ="modal-dialog">
+          <div class = "modal-content">
+            <div class="modal-header">
+             
+              <h4 class ="modal-title">Confirmación </h4>
+              <button tyle ="button" class ="close" data-dismiss="modal" aria-hidden="true">&times; </button>
+            </div>
+              <div class="modal-body">
+                <p> ¿Estás Seguro?</p>
+
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-default" type="submit" class="Save" >Confirmar</button>
+                <button type="button" class  ="btn btn-default" data-dismiss="modal">Cerrar</button>
+ 
+              </div>
+
+          </div>
+        </div>
+      </div>
+      
+      
+      </div>
+      <script src= "http://code.jquery.com/jquery-latest.js"></script>
+      <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </form>
+
+
+
+
+        
+        {%endblock codigo%}

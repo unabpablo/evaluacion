@@ -1,0 +1,258 @@
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+<script type="text/javascript" src="{% static "fusioncharts/themes/fusioncharts.theme.fint.js" %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<link rel="stylesheet" type="text/css"
+href="{% static 'css/menu.css'%}">
+{%block css%}
+
+{%endblock css%}
+{% block title %}
+
+
+{% endblock %}
+</head>
+
+<body>
+
+
+<div class="page-wrapper chiller-theme toggled">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    jQuery(function ($) {
+
+      $(".sidebar-dropdown > a").click(function() {
+    $(".sidebar-submenu").slideUp(200);
+    if (
+      $(this)
+        .parent()
+        .hasClass("active")
+    ) {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .parent()
+        .removeClass("active");
+    } else {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .next(".sidebar-submenu")
+        .slideDown(200);
+      $(this)
+        .parent()
+        .addClass("active");
+    }
+  });
+  
+  $("#close-sidebar").click(function() {
+    $(".page-wrapper").removeClass("toggled");
+  });
+  $("#show-sidebar").click(function() {
+    $(".page-wrapper").addClass("toggled");
+  });
+  
+  
+     
+     
+  });
+</script>
+
+
+<script>
+  setTimeout(function(){
+    if ($('#msg').length > 0) {
+      $('#msg').remove();
+    }
+  }, 2000)
+</script> 
+
+
+    {% csrf_token %}
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="http://127.0.0.1:8000">Menu</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+
+        <div class="user-info">
+          <span class="user-name">{% if user.is_authenticated %}
+              {{ user.userprofile }}
+             
+              {%endif%}
+            <strong>{{user.first_name}}</strong>
+          </span>
+          <span class="user-role"></span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>En Linea</span>
+          </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown">
+
+                
+            <a href="{% url 'registro:evaluacion' %}">
+ 
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Configuraciones</span>
+              <span class="badge badge-pill badge-warning"></span>
+            </a>
+            {% if request.user.is_superuser %}
+            {%else%}
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a href="{% url 'registro:crear_eval' %}">
+              <i class="fa fa-chart-line"></i>
+          
+
+             
+              <span>Mis evaluaciones</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                
+              </ul>
+            </div>
+          </li>
+          {%endif%}
+          <li class="sidebar-dropdown">
+
+            <a href="{% url 'registro:mis_graficos' %}">
+              <i class="fa fa-chart-line"></i>
+              <span>Graficos</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+
+              </ul>
+            </div>
+            {% if request.user.is_superuser %}
+          
+          
+          <li class="sidebar-dropdown">
+
+                
+              <a href="{% url 'registro:register' %}">
+   
+                <i class="fa fa-tachometer-alt"></i>
+                <span>Registrar Usuarios</span>
+                <span class="badge badge-pill badge-warning"></span>
+              </a>
+              {%endif%}
+              {% if request.user.is_superuser %}
+              <li class="sidebar-dropdown">
+
+                
+                  <a href="{% url 'registro:drift_list' %}">
+       
+                    <i class="fa fa-tachometer-alt"></i>
+                    <span>Configuración Drift</span>
+                    <span class="badge badge-pill badge-warning"></span>
+                  </a>
+                  {%endif%}
+
+              {% if request.user.is_superuser %}
+            </li>
+            <li class="sidebar-dropdown">
+                <a href="{% url 'registro:people' %}">
+                  <i class="fa fa-chart-line"></i>
+                  <span>Ver historial</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    
+                  </ul>
+                </div>
+              </li>
+              {%endif%}
+            </li>
+
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="http://127.0.0.1:8000/password/ ">
+              <i class="fa fa-chart-line"></i>
+              <span>Cambiar contraseña</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+              <a href="{% url 'logout' %}">
+                <i class="fa fa-chart-line"></i>
+                <span>Salir</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  
+                </ul>
+              </div>
+            </li>
+         
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+
+  </nav>
+
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+{%block codigo%}
+{%endblock codigo%}
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+
+    
+</body>
+
+</html>

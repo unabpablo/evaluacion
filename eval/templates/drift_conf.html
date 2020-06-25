@@ -1,0 +1,153 @@
+{% extends "evaluaciones.html"%}
+
+{%block codigo%}
+
+<div class="container">
+  <div class="col-xs-12">
+
+      {%if messages%}
+      {%for message in messages%}
+      <div class="alert alert-{{message.tags}} m-2" id="msg" role=  "alert">
+
+          <center>{{message}}</center>
+      </div>
+
+  </div>
+</div>
+{%endfor%}
+{%endif%}
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% if request.user.is_superuser %}
+<div class="container text-center">
+
+
+ 
+
+  </div>
+
+                            
+       {% if conf2 %}                                             
+
+                                                        <div class="container">
+ 
+                                                          <h1>Configuraciones</h1>
+                                                         
+                                                        
+                                                        
+                                                        <table class="table table-striped">
+                                                         
+                                                          <thead >
+                                                         
+                                                            <tr>
+                                                         
+                                                         
+                                                              <th>Nombre de Evaluación</th>
+                                                         
+                                                              <th></th>
+                                                         
+                                                            </tr>
+                                                         
+                                                          </thead>
+                                                         
+                                                          <tbody>
+                                                        
+                                                            {%for i in conf2 %}
+
+                                                            <tr>
+                                                        
+                                                         
+                                                         
+                                                              <td>{{i.Nombre}}</td>
+                                                              
+                                                              <td><form id="frm_edit" action="{%url 'registro:confediciion' pk=i.pk%}"  method="get">
+                                                                {% csrf_token %}
+                                                                            <!-- form controls -->  
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                              <i class="fas fa-cog"></i> Revisar Configuración
+                                                                            </button>
+                                                                            </form>
+                                            
+                                                                            {%endfor%}
+                                                                            
+                                                                            
+                                                            </tr>
+                                                            {%endif%}
+
+{% else %}
+
+
+
+
+
+
+{% if conf %}
+
+<div class="container">
+ 
+  <h3>Configuraciones</h2>
+ 
+
+
+<table class="table table-striped">
+ 
+  <thead >
+ 
+    <tr>
+ 
+ 
+      <th>Nombre de Evaluación</th>
+ 
+      <th></th>
+ 
+    </tr>
+ 
+  </thead>
+ 
+  <tbody>
+
+    {%for i in conf %}
+    {%if i.booleano == False%}
+    <tr>
+
+ 
+ 
+      <td>{{i.Nombre}}</td>
+      
+      <td><form id="frm_edit" action="{%url 'registro:editar' pk=i.pk%}"  method="get">
+        {% csrf_token %}
+                    <!-- form controls -->  
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-cog"></i> Configurar etiquetas
+                    </button>
+                    </form>
+                    {% endif %}
+                    {%endfor%}
+                    
+                    <form id="frm_edit" action='http://127.0.0.1:8000/confnueva/' method="get"></td>
+                      {% csrf_token %}
+                      
+                      <!-- form controls -->
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-cog"></i> Crear Evaluación
+                      </button>
+    </tr>
+
+    {% else %}
+    <h1>No hay Configuraciones para completar</h1>
+  
+
+                                  {%endif%}
+  </tbody>
+ 
+</table>
+ 
+ 
+ 
+</div>
+{%endif%}
+</div>
+{%endblock codigo%}
