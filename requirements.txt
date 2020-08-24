@@ -1,4 +1,4 @@
-Django==2.2.2
+Django==2.2.13
 django-bootstrap-datepicker-plus==3.0.5
 django-celery
 django-widget-tweaks
